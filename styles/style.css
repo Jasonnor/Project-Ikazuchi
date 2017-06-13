@@ -1,0 +1,500 @@
+/* DO NOT CHANGE */
+
+#container {
+	width : 100%;
+	height : 100%;
+	overflow : hidden;
+	position : fixed;
+	top : 0px;
+	left : 0px;
+
+	z-index: -1;
+}
+
+/* ------------- */
+
+body {
+	margin : 0;
+	font-family: "Noto Sans CJK TC Light";
+	font-size : 16pt;
+	line-height : 1.3em;
+	color : #555;
+}
+
+.useFont {
+	font-family: 'Questrial', 'Helvetica', 'Arial', sans-serif;
+}
+
+a {
+	color : #618F46;
+}
+
+a:visited {
+	color : #75AD55;
+}
+
+a:hover {
+	color : #476933;
+}
+
+.element {
+	margin : 4px;
+	padding : 4px 8px;
+
+	border : 1px solid #555;
+}
+
+.button {
+
+	margin : 4px;
+	padding : 4px 8px;
+
+	border : 1px solid #555;
+
+	cursor : pointer;
+	color : #555;
+
+	text-align : center;
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.button:hover {
+	background-color : #B9E09D;
+}
+
+.disabled {
+	border-color : #CCC;
+	color : #CCC;
+}
+
+.disabled:hover {
+	background-color : transparent;
+}
+
+.label {
+	margin : 4px 2px;
+	padding : 4px;
+}
+
+.heading {
+	font-size: 22pt;
+}
+
+.rule li {
+	line-height: 1.5em;
+}
+
+.highlight {
+	color : #618F46;
+}
+
+.active {
+	background-color : #C3E0B1;
+}
+
+.clear {
+	clear : both;
+}
+
+.left {
+	float : left;
+}
+
+.right {
+	float : right;
+}
+
+.centered {
+	position: fixed;
+
+	top: 50%;
+	left: 50%;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+#overlay {
+	position : fixed;
+
+	top : 0px;
+	left : 0px;
+
+	width : 100%;
+	height : 100%;
+
+	background-color : #FFF;
+	opacity : 0.7;
+
+	z-index : 1;
+}
+
+#hud {
+	position : absolute;
+	top : 4px;
+	left : 4px;
+
+	z-index : 2;
+}
+
+#menu {
+	padding: 8px;
+}
+
+.page {
+	padding : 0 8px;
+}
+
+.page > * {
+	margin-top : 12px;
+	margin-bottom : 12px
+}
+
+#winner, #loser, 
+#newButton, #menuButton,
+#mineDisplay, #timeDisplay,
+#shareButton, #share,
+#feedbackButton, #feedback,
+#error, #welcome, #overlay,
+#menu, .page, #clearPrompt,
+#levelPanel, #apply,
+#newBest {
+	display: none;
+}
+
+#winner, #loser, #welcome, #levelPanel {
+	z-index : 2;
+}
+
+#winner, #loser {
+	padding : 8px;
+}
+
+#winner {
+	width : 300px;
+
+	margin-left: -150px;
+	margin-top: -150px;
+}
+
+#winner .element {
+	background-color : #C3E0B1;
+	text-align : center;
+}
+
+.times {
+	padding : 10px 0;
+}
+
+#secret {
+	font-size : 12pt;
+	font-family : 'Helvetica', 'Arial', sans-serif;
+	border : 1px solid black;
+
+	padding : 8px;
+	background-color : #FFFFFF;
+}
+
+#loser {
+	width : 220px;
+
+	margin-left: -110px;
+	margin-top: -100px;
+}
+
+#loser .element {
+	background-color : #FFC2C2;
+	text-align : center;
+}
+
+#stats span {
+	margin-left : 10px;
+}
+
+table {
+	border-spacing : 0;
+	margin : 4px;
+}
+
+td {
+	padding : 4px 8px;
+
+	text-align : center;
+	font-weight : normal;
+}
+
+#controls tr:first-child td,
+#stats tr:first-child td {
+	border-bottom : 1px solid #555;
+}
+
+#controls td:first-child,
+#stats td:first-child {
+	border-right : 1px solid #555;
+}
+
+#settings td:first-child, 
+#custom td:first-child {
+	text-align : right;
+}
+
+#controls tr:first-child td:first-child {
+	color : #618F46;
+}
+
+#clearPrompt > * {
+	margin-top : 0;
+	margin-bottom : 0;
+}
+
+#externals {
+	position : fixed;
+	top : 4px;
+	right : 4px;
+}
+
+#externals .button {
+	font-size : 12pt;
+	padding : 1px 4px;
+}
+
+#share textarea {
+	width : 300px;
+	height : 50px;
+	margin : 4px;
+	font-size : 12pt;
+	font-family : "Questrial", sans-serif;
+}
+
+#timeDisplay {
+	position : fixed;
+	bottom : 4px;
+	left : 4px;
+}
+
+#mineDisplay {
+	position : fixed;
+	bottom : 4px;
+	right : 4px;
+}
+
+#welcome {
+	width : 720px;
+
+	margin-left : -360px;
+	margin-top : -250px;
+}
+
+#intro {
+	width : 408px;
+	margin : 24px 0 0;
+	padding : 0 8px;
+	border-right : 1px solid #555;
+}
+
+#info {
+	width : 276px;
+	font-size : 14pt;
+	padding-left : 16px;
+	margin : 24px 0 0;
+}
+
+#info .heading {
+	font-size : 20pt;
+	padding-top : 12px;
+}
+
+#info .label, #intro .label {
+	margin : 8px 2px;
+}
+
+#playClassicButton, #playSweepButton {
+	float : none;
+	margin : 16px auto;
+
+	-webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+	box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#playClassicButton {
+	padding : 16px 32px;
+	font-size : 24pt;
+	width : 170px;
+	margin-bottom : 32px;
+}
+
+#playSweepButton {
+	padding : 12px 24px;
+	font-size : 20pt;
+	width : 145px;
+}
+
+.title {
+	font-size : 32pt;
+	padding : 0;
+	text-align : center;
+}
+
+.subtitle {
+	font-size : 14pt;
+	text-align : center;
+}
+
+#antiOverlap {
+	height : 50px;
+}
+
+#levelPanel {
+	margin-left: -200px;
+	margin-top: -180px;
+	padding: 16px;
+}
+
+.customButtons div {
+	width: 25px;
+	margin: 0 auto;
+
+	padding: 2px 5px 0;
+}
+
+.up div {
+	margin-top: 10px;
+}
+
+.down div {
+	margin-bottom: 20px;
+}
+
+.custom {
+	border : 1px dashed #555 !important;
+}
+
+#welcomeOption {
+	font-size : 12pt;
+	margin-top : 36px !important;
+}
+
+/*custom css*/
+#ikatsuchi {
+    position: relative;
+    background-image: url(../textures/ikatsuchi.png);
+    background-position: center;
+    height: 400px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#ikatsuchi_m {
+    position: relative;
+    background-image: url(../textures/ikatsuchi_m.jpg);
+    background-position: center;
+    height: 300px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+}
+
+#winner {
+    top: 30%;
+    background-color: #fff;
+    -webkit-animation:fadeInUp 0.5s;
+	animation:fadeInUp 0.5s;
+}
+
+#loser {
+    top: 30%;  
+    background-color: #fff;
+    -webkit-animation:fadeInUp 0.5s;
+	animation:fadeInUp 0.5s;
+}
+
+#settings {
+    -webkit-animation:fadeInDown 0.5s;
+	animation:fadeInDown 0.5s;
+}
+
+#menu {
+    -webkit-animation:fadeInDown 0.5s;
+	animation:fadeInDown 0.5s;
+}
+/*keyframes*/
+@-webkit-keyframes fadeIn 
+{
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+@keyframes fadeIn 
+{
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+@-webkit-keyframes fadeInUp
+{
+    0% 
+    {
+		opacity: 0;
+		-webkit-transform: translateY(10px);
+		transform: translateY(10px);
+	}
+    100% 
+	{
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+}
+@keyframes fadeInUp
+{
+    0% 
+    {
+		opacity: 0;
+		-webkit-transform: translateY(10px);
+		transform: translateY(10px);
+	}
+    100% 
+    {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+}
+@-webkit-keyframes fadeInDown
+{
+    0% 
+    {
+		opacity: 0;
+		-webkit-transform: translateY(-10px);
+		transform: translateY(-10px);
+	}
+    100% 
+    {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+}
+@keyframes fadeInDown
+{
+    0% 
+    {
+		opacity: 0;
+		-webkit-transform: translateY(-10px);
+		transform: translateY(-10px);
+	}
+    100% 
+    {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+}

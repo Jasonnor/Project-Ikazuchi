@@ -1,0 +1,489 @@
+<!--
+  - Ikazuchi
+  - 
+  - Amazing 3D Game you ever seen.
+  - 
+  - @author Britannia Knights
+  -		   S0154017 S0154026 S0154036
+  - @see README.pptx
+ -->
+ <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>seniM D3LGbeW</title>
+	<link rel="stylesheet" media="all" href="styles/style.css"/>
+	
+	<script type="text/javascript" charset="utf-8">
+
+		texturePath = "textures/tex40.png";
+
+		useBackgroundTextures = false;
+		
+		/* Using background texture, for testing */
+		//backgroundPatternTexture = "textures/back.png";
+		//backgroundGlowTexture = "textures/glow.png";
+
+		backgroundColor = 0xFFFFFF;
+
+		mainAlpha = 1.0;
+		hoverAlpha = 0.65;
+
+		cubeSpacing = 0.1;
+
+		numberSize = 0.17;
+		mineSize = 0.3;
+
+		useIcosahedron = false;
+		mineSpikyness = 1.25;
+
+		useAntialias = true;
+		useTextureFiltering = true;
+
+		drawBigCubes = false;
+		drawLines = false;
+
+		showWelcomeScreen = false;
+
+		invertedControls = false;
+		controlSpeed = 1;
+
+		invertedNumbers = false;
+
+		maxCubes = 10000;
+
+
+		window.onload = function() {
+			start();
+		};
+
+	</script>
+
+</head>
+<body>
+
+	<div id="hud">
+
+		<div class="button left clear" id="menuButton"> 選單 </div>
+		<div class="button left newButton" id="newButton"> 新遊戲 </div>
+
+		<div class="element clear left" id="menu">
+
+			<div class="button left" id="settingsButton"> 設定 </div>
+			<div class="button left" id="statsButton"> 紀錄 </div>
+			<div class="button left" id="instructionsButton"> 規則 </div>
+			<div class="button left" id="controlsButton"> 控制 </div>
+
+		</div>
+
+		<div class="page element left clear" id="settings">
+
+			<div class="label heading"> 設定 </div>
+
+			<table>
+
+				<tr>
+					<td class="label"> 難度： </td>
+					<td colspan="4">
+						<div class="button left easy"> 簡單 </div>
+						<div class="button left medium"> 普通 </div>
+						<div class="button left hard"> 困難 </div>
+						<div class="button left custom"> 自訂 </div>
+					</td>
+				</tr>
+
+				<tr class="up">
+					<td></td>
+					<td><div>長</div></td>
+					<td><div>寬</div></td>
+					<td><div>高</div></td>
+					<td><div>雷數</div></td>
+				</tr>
+
+				<tr class="customButtons">
+					<td></td>
+					<td><div class="button customUp0">&#x25B3;</div></td>
+					<td><div class="button customUp1">&#x25B3;</div></td>
+					<td><div class="button customUp2">&#x25B3;</div></td>
+					<td><div class="button customUp3">&#x25B3;</div></td>
+				</tr>
+
+				<tr>
+					<td></td>
+					<td class="label custom0">5</td>
+					<td class="label custom1">5</td>
+					<td class="label custom2">5</td>
+					<td class="label custom3">10</td>
+				</tr>
+
+				<tr class="customButtons down">
+					<td></td>
+					<td><div class="button customDown0">&#x25BD;</div></td>
+					<td><div class="button customDown1">&#x25BD;</div></td>
+					<td><div class="button customDown2">&#x25BD;</div></td>
+					<td><div class="button customDown3">&#x25BD;</div></td>
+				</tr>
+
+				<tr>
+					<td class="label"> 動畫效果： </td>
+					<td colspan="4">
+						<div class="button left" id="animationsOn"> 開 </div>
+						<div class="button left" id="animationsOff"> 關 </div>
+					</td>
+				</tr>
+
+				<tr>
+					<td class="label"> 自訂置中： </td>
+					<td colspan="4">
+						<div class="button left" id="recenterOn"> 開 </div>
+						<div class="button left" id="recenterOff"> 關 </div>
+						<div class="button right active" id="apply"> 套用 </div>
+					</td>
+				</tr>
+
+			</table>
+
+		</div>
+
+		<div class="page element left clear" id="stats">
+
+			<div class="label heading"> 紀錄 </div>
+
+			<table>
+				<tr>
+					<td> 時間 </td>
+				</tr>
+				<tr>
+					<td> 簡單 </td>
+					<td id="classiceasy"> 無 </td>
+				</tr>
+				<tr>
+					<td> 普通 </td>
+					<td id="classicmedium"> 無 </td>
+				</tr>
+				<tr>
+					<td> 困難 </td>
+					<td id="classichard"> 無 </td>
+				</tr>
+			</table>
+
+			<div class="label"> 勝利次數： <span id="gamesWon"> 0 </span> </div>
+			<div class="label"> 遊玩次數： <span id="gamesPlayed"> 0 </span> </div>
+			<div class="label"> 遊玩時間： <span id="timePlayed"> 0 </span> </div>
+
+			<div class="button left clear" id="clearButton"> 刪除紀錄 </div>
+			<div class="left" id="clearPrompt">
+				<div class="label left"> 確定？ </div>
+				<div class="button left" id="clearNowButton"> 是 </div>
+			</div>
+
+		</div>
+
+		<div class="page element left clear rule" id="instructions">
+
+			<div class="label heading"> 規則 </div>
+
+			<ul>
+				<li> 
+					某些<span class="highlight">方塊</span>藏有<span class="highlight">地雷</span>
+				</li>
+				<li> 
+					開啟地雷方塊<span class="highlight">遊戲將會結束</span>
+				</li>
+				<li> 
+					開啟所有<span class="highlight">空的</span>方塊去贏得<span class="highlight">勝利</span>
+				</li>
+				<li> 
+					<span class="highlight">數字</span>代表周圍有多少地雷方塊
+				</li>
+				<li> 
+					<span class="highlight">標記</span>地雷方塊以避免開啟
+				</li>
+			</ul>
+
+		</div>
+
+		<div class="page element left clear" id="controls">
+
+			<div class="label heading"> 控制 </div>
+
+			<table class="clear">
+				<tr>
+					<td> 滑鼠 </td>
+					<td> 點擊 </td>
+					<td> 拖曳 </td>
+				</tr>
+				<tr>
+					<td> 左鍵 </td>
+					<td> 打開方塊 </td>
+					<td> 旋轉視角 </td>
+				</tr>
+				<tr>
+					<td> 右鍵 </td>
+					<td> 標記 / 取消 </td>
+					<td> 平移視角 </td>
+				</tr>
+				<tr>
+					<td> 中鍵 </td>
+					<td> 重置攝影機 </td>
+				</tr>
+			</table>
+
+			<div class="label"> 使用 <span class="highlight">滾輪</span> 縮放視角 </div>
+
+			<table class="clear">
+				<tr>
+					<td> 鍵盤 </td>
+					<td> 動作 </td>
+				</tr>
+				<tr>
+					<td> F/D & J/K </td>
+					<td> 同於滑鼠按鍵 </td>
+				</tr>
+				<tr>
+					<td> Space </td>
+					<td> 開始新遊戲 </td>
+				</tr>
+				<tr>
+					<td> Esc </td>
+					<td> 開啟 / 關閉選單 </td>
+				</tr>
+				<tr>
+					<td> R </td>
+					<td> 重置攝影機 </td>
+				</tr>
+			</table>
+
+		</div>
+
+		<div class="left clear" id="antiOverlap"></div>
+
+	</div>
+
+	<div id="overlay"></div>
+
+	<div class="element centered" id="winner">
+		<div class="element">獲得成就：地雷拆除專家！</div>
+		
+		<div id="ikatsuchi"></div>
+
+		<div class="times">
+			<div class="label">總計時間：<span class="gameTime"> 無 </span></div>
+			<div class="label">最佳紀錄：<span class="bestTime"> 無 </span></div>
+			<div class="element" id="newBest">新的最佳紀錄！</div>
+		</div>
+
+		<div class="button right newButton"> 新遊戲 </div>
+	</div>
+
+	<div class="element centered" id="loser">
+		<div class="element">你已經死了。</div>
+		
+		<div id="ikatsuchi_m"></div>
+
+		<div class="times">
+			<div class="label">總計時間：<span class="gameTime"> 無 </span></div>
+			<div class="label">最佳紀錄：<span class="bestTime"> 無 </span></div>
+		</div>
+
+		<div class="button left" id="restartButton"> 重來 </div>
+		<div class="button right newButton"> 新遊戲 </div>
+	</div>
+
+	<div class="element centered" id="welcome">
+
+		<div class="left" id="intro">
+
+			<div class="label">
+				<span class="title highlight"> seniM D3LGbeW </span>
+			</div>
+
+			<div class="label text">
+				總之，就是用WebGL做的3D踩地雷。<br/>
+				別說廢話了改快按開始
+			</div>
+
+			<div class="button" id="playClassicButton"> 開始 </div>
+
+		</div>
+
+		<div class="left" id="info">
+
+			<div class="label heading highlight"> 向您介紹 </div>
+
+			<div class="label">
+				請觀看<span class="bold">遊戲規則</span>與<span class="bold">控制方式</span>
+			</div>
+
+			<div class="label">
+				計算機圖學期末project<br/>
+				送給剛從期末考的折磨中<br/>
+				活下來的你<br/>
+				你能找出所有的地雷嗎？
+			</div>
+
+		</div>
+
+		<div class="clear"></div>
+
+	</div>
+
+	<div class="element centered" id="levelPanel">
+		<div class="label clear">選擇難度：</div>
+
+		<table class="clear">
+
+			<tr>
+				<td colspan="4">
+					<div class="left button easy"> 簡單 </div>
+					<div class="left button medium"> 普通 </div>
+					<div class="left button hard"> 困難 </div>
+					<div class="left button custom"> 自訂 </div>
+				</td>
+			</tr>
+
+			<tr class="up">
+				<td><div>長</div></td>
+				<td><div>寬</div></td>
+				<td><div>高</div></td>
+				<td><div>雷數</div></td>
+			</tr>
+
+			<tr class="customButtons">
+				<td><div class="button customUp0">&#x25B3;</div></td>
+				<td><div class="button customUp1">&#x25B3;</div></td>
+				<td><div class="button customUp2">&#x25B3;</div></td>
+				<td><div class="button customUp3">&#x25B3;</div></td>
+			</tr>
+
+			<tr>
+				<td class="label custom0">5</td>
+				<td class="label custom1">5</td>
+				<td class="label custom2">5</td>
+				<td class="label custom3">10</td>
+			</tr>
+
+			<tr class="customButtons down">
+				<td><div class="button customDown0">&#x25BD;</div></td>
+				<td><div class="button customDown1">&#x25BD;</div></td>
+				<td><div class="button customDown2">&#x25BD;</div></td>
+				<td><div class="button customDown3">&#x25BD;</div></td>
+			</tr>
+
+		</table>
+
+		<div class="button left" id="cancel">返回</div>
+		<div class="button right" id="ok">開始</div>
+
+	</div>
+
+	<div class="element" id="timeDisplay"> 時間： <span id="time"> 0 </span> 秒</div>
+
+	<div class="element clear" id="mineDisplay"> 可能剩下 <span id="mines" class="highlight"> 10 </span> 顆地雷</div>
+
+	<div id="container"></div>
+
+<script id="vertex-shader" type="x-shader/x-vertex" charset="utf-8">
+
+	uniform mat4 uMVMatrix;
+	uniform mat4 uPMatrix;
+
+	attribute vec3 aPosition;
+	attribute vec2 aTextureCoord;
+
+	varying vec2 vTextureCoord;
+
+	void main( void ) {
+
+		gl_Position = uPMatrix * uMVMatrix * vec4( aPosition, 1.0 );
+
+		vTextureCoord = aTextureCoord;
+
+	}
+
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment" charset="utf-8">
+
+	precision mediump float;
+
+	uniform sampler2D uTexture;
+	uniform float uAlpha;
+
+	varying vec2 vTextureCoord;
+
+	void main(void) {
+
+		gl_FragColor = texture2D( uTexture, vTextureCoord );
+		gl_FragColor.a = min( gl_FragColor.a, uAlpha ) - 0.01;
+
+	}
+
+</script>
+
+<script id="texture-vertex-shader" type="x-shader/x-vertex" charset="utf-8">
+
+	attribute vec3 aPosition;
+	attribute vec2 aTextureCoord;
+
+	varying vec2 vTextureCoord;
+
+	void main(void) {
+
+		gl_Position = vec4( aPosition, 1.0 );
+
+		vTextureCoord = aTextureCoord;
+
+	}
+
+</script>
+
+<script id="texture-fragment-shader" type="x-shader/x-fragment" charset="utf-8">
+
+	precision mediump float;
+
+	uniform sampler2D uTexture;
+
+	varying vec2 vTextureCoord;
+
+	void main(void) {
+
+		gl_FragColor = texture2D( uTexture, vTextureCoord );
+
+	}
+
+</script>
+
+<script src="./lib/requestAnimationFrame.js"></script>
+<script src="./lib/glMatrix.js"></script>
+<script src="./lib/Tween.js"></script>
+<script src="./lib/Stats.js"></script>
+<script src="./lib/System.js"></script>
+<script src="./lib/jquery-1.7.1.js"></script>
+
+<script src="./src/utilities.js"></script>
+<script src="./src/WebGLUtilities.js"></script>
+<script src="./src/StateMachine.js"></script>
+
+<script src="./src/Cube.js"></script>
+<script src="./src/Face.js"></script>
+<script src="./src/Icosahedron.js"></script>
+<script src="./src/Element.js"></script>
+
+<script src="./src/BSPNode.js"></script>
+<script src="./src/BSPTree.js"></script>
+
+<script src="./src/Settings.js"></script>
+<script src="./src/Stats.js"></script>
+<script src="./src/Menu.js"></script>
+<script src="./src/Background.js"></script>
+
+<script src="./src/Grid.js"></script>
+<script src="./src/EventHandler.js"></script>
+<script src="./src/Camera.js"></script>
+<script src="./src/Game.js"></script>
+
+<script src="./src/main.js"></script>
+
+</body>
+</html>
